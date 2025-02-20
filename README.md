@@ -49,7 +49,7 @@ The total loss for the generator is a weighted combination: $$ L = L_{GAN} + \al
 
 ## Results
 
-The hyperparameters can be seen in the notebook but apart from loss functions' coefficients, we used the same hyperparameters as the paper. We generate all adversarial examples for different attack methods under an $L-{\inf}$ bound of 8 on CIFAR-10
+The hyperparameters can be seen in the notebook but apart from loss functions' coefficients, we used the same hyperparameters as the paper. We generate all adversarial examples for different attack methods under an $L_{\infty}$ bound of 8 on CIFAR-10
 
 ### AdvGAN Untargetted Semi-whitebox Attack
 
