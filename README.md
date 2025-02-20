@@ -49,9 +49,9 @@ The total loss for the generator is a weighted combination: $$ L = L_{GAN} + \al
 
 ## Results
 
-The hyperparameters can be seen in the notebook but apart from loss functions' coefficients, we used the same hyperparameters as the paper.
+The hyperparameters can be seen in the notebook but apart from loss functions' coefficients, we used the same hyperparameters as the paper. We generate all adversarial examples for different attack methods under an $L-{\inf}$ bound of 8 on CIFAR-10
 
-### Untargetted Semi-whitebox Attack
+### AdvGAN Untargetted Semi-whitebox Attack
 
 | Class      | Clean Accuracy | Adversarial Accuracy | Attack Success Rate |
 |------------|----------------|----------------------|---------------------|
@@ -70,7 +70,7 @@ The hyperparameters can be seen in the notebook but apart from loss functions' c
 ![untargetted-attack](./imgs/untargetted-attack.png)
 
 
-### Targetted Attack
+### AdvGAN Targetted Semi-whitebox Attack 
 
 The target was cat.
 
@@ -92,7 +92,7 @@ The target was cat.
 
 
 
-## Other Attack Methods
+### Other Attack Methods
 
  The previous methods for generating adversarial examples are based on the gradient of the loss function of the model. We specifically compared FGSM and PGD to the advGAN method. They have a few problems such as:
 
@@ -103,7 +103,7 @@ The target was cat.
  ![FGSM-PGD-Attacks](./imgs/pgd-fgsm-attacks.png)
 
 
- ## Comparison
+ ### Comparison
 
 | Attack Method       | Attack Success Rate |
 |---------------------|---------------------|
