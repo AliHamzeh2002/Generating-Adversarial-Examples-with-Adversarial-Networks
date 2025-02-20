@@ -121,6 +121,15 @@ The target was cat.
 | AdvGAN (Untargeted) | 91.77               |
 | AdvGAN (Targeted)   | 99.88               |
 
+## Model Checkpoint
+
+The trained generator can be found and used in [checkpoints directory](./checkpoints)
+
+```python
+generator_best = Generator_CIFAR10_UNet().to(DEVICE)
+generator_best.load_state_dict(torch.load("best_generator.pth", weights_only=True))
+```
+
 
 
 
