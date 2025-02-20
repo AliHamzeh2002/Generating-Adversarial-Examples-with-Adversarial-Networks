@@ -47,7 +47,7 @@ L_{hinge} = \mathbb{E}_x[max(0,||G(x)||_2 - c]
 
 The total loss for the generator is a weighted combination: $$ L = L_{GAN} + \alpha L_{adv} + \beta L_{hinge} $$ where \( \alpha \) and \( \beta \) balance the terms. This setup ensures effective attacks while keeping perturbations subtle. We changed this final formula and added $\gamma$ to balance the adversarial loss and other losses: 
 ```math
-L = \gamma L_{GAN} + \alpha L_{adv} + \beta L_{hinge} $$
+L = \gamma L_{GAN} + \alpha L_{adv} + \beta L_{hinge}
 ```
 
 ## Results
