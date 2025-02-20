@@ -4,8 +4,6 @@
 
 This is an Implementation of paper ["Generating Adversarial Examples with Adversarial Networks"](https://arxiv.org/abs/1801.02610) in pytorch. The idea is to use a GAN to generate adversarial examples. We implemented the semi-whitebox attack in which we have the target model's weights during training but after that we don't need it.
 
-
-
 ## Target Model
 
 The target model is resnet20 model from [henyaofo/pytorch-cifar-models](henyaofo/pytorch-cifar-models). The model is trained on CIFAR-10 dataset and has accuracy of 92.6.
@@ -130,7 +128,9 @@ generator_best = Generator_CIFAR10_UNet().to(DEVICE)
 generator_best.load_state_dict(torch.load("best_generator.pth", weights_only=True))
 ```
 
-
+# Contributors
+* [Ali Hamzehpour](https://github.com/AliHamzeh2002)
+* [Mina Shirazi](https://github.com/meenashrz)
 
 
 
