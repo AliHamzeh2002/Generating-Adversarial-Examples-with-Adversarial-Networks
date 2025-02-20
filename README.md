@@ -4,6 +4,8 @@
 
 This is an Implementation of paper ["Generating Adversarial Examples with Adversarial Networks"](https://arxiv.org/abs/1801.02610) in pytorch. The idea is to use a GAN to generate adversarial examples. We implemented the semi-whitebox attack in which we have the target model's weights during training but after that we don't need it.
 
+
+
 ## Target Model
 
 The target model is resnet20 model from [henyaofo/pytorch-cifar-models](henyaofo/pytorch-cifar-models). The model is trained on CIFAR-10 dataset and has accuracy of 92.6.
@@ -16,19 +18,32 @@ AdvGAN is a generative adversarial network (GAN)-based method for generating adv
 
 1. **Adversarial Loss ($L_{adv}$)**  
    - **Purpose**: Ensures the generated perturbation fools the target model. For untargeted attacks, it pushes the prediction away from the true class; for targeted attacks, it drives it toward a specific class.
-   - **Formula (Untargeted Attack)**: $$ L_{adv} = \max(\kappa, f(x + G(x))_y - \max_{i \neq y} f(x + G(x))_i) $$(Here, \( f \) is the target model, \( y \) is the true class, \( G(x) \) is the perturbation, and \( \kappa \) is a confidence margin.)
-   - **Formula (Targeted Attack)**: $$ L_{adv} = \max(\kappa, \max_{i \neq t} f(x + G(x))_i - f(x + G(x))_t) $$
-     where \( t \) is the target class.
+   - **Formula (Untargeted Attack)**:
+```math
+L_{adv} = \max(\kappa, f(x + G(x))_y - \max_{i \neq y} f(x + G(x))_i)
+```
+   (Here, $f$ is the target model, $y$ is the true class, $G(x)$ is the perturbation, and $\kappa$ is a confidence margin.)
+   - **Formula (Targeted Attack)**:
+```math
+L_{adv} = \max(\kappa, \max_{i \neq t} f(x + G(x))_i - f(x + G(x))_t)
+```
+   (where $t$ is the target class.)
 
 2. **GAN Loss ($L_{GAN}$)**  
-   - **Purpose**: Trains the generator \( G \) to produce realistic perturbations, guided by a discriminator \( D \), keeping them visually imperceptible.
-   - **Formula**: $$ L_{GAN} = \mathbb{E}[\log D(x)] + \mathbb{E}[\log(1 - D(x + G(x)))] $$
-     (Standard GAN loss, where \( D \) distinguishes real from perturbed inputs.)
+   - **Purpose**: Trains the generator $G$ to produce realistic perturbations, guided by a discriminator $D$ , keeping them visually imperceptible.
+   - **Formula**:
+```math
+L_{GAN} = \mathbb{E}[\log D(x)] + \mathbb{E}[\log(1 - D(x + G(x)))]
+```
+   (Standard GAN loss, where $D$ distinguishes real from perturbed inputs.)
 
 3. **Hinge Loss ($L_{hinge}$)**  
    - **Purpose**: Limits the magnitude of the perturbation to maintain stealthiness (e.g., under \( L_2 \) norm).
-   - **Formula**: $$ L_{hinge} = \mathbb{E}_x[max(0,||G(x)||_2 - c] $$
-     (Measures the squared \( L_2 \) norm of the perturbation and $c$ is the maximum allowed magnitude.)
+   - **Formula**:
+```math
+L_{hinge} = \mathbb{E}_x[max(0,||G(x)||_2 - c]
+```
+   (Measures the squared $L_2$ norm of the perturbation and $c$ is the maximum allowed magnitude.)
 
 The total loss for the generator is a weighted combination: $$ L = L_{GAN} + \alpha L_{adv} + \beta L_{hinge} $$ where \( \alpha \) and \( \beta \) balance the terms. This setup ensures effective attacks while keeping perturbations subtle. We changed this final formula and added $\gamma$ to balance the adversarial loss and other losses: $$ L = \gamma L_{GAN} + \alpha L_{adv} + \beta L_{hinge} $$
 
