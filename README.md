@@ -128,7 +128,7 @@ generator_best = Generator_CIFAR10_UNet().to(DEVICE)
 generator_best.load_state_dict(torch.load("best_generator.pth", weights_only=True))
 ```
 
-# Contributors
+## Contributors
 * [Ali Hamzehpour](https://github.com/AliHamzeh2002)
 * [Mina Shirazi](https://github.com/meenashrz)
 
